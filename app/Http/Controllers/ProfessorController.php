@@ -33,18 +33,22 @@ class ProfessorController extends Controller
         ]);
     }
 
-    public function edit(Professor $professor)
-    {
-        //
+    public function edit($id) {
+        $aluno = Professor::find($id);
+        return view('professores.edit',compact('professores'));
     }
 
-    public function update(Request $request, Professor $professor)
-    {
-        //
+     public function update(Request $request,$id){
+        $newProfessor = $request->all();
+
+        if(Professor::findOrFail($id)->update($newProfessor))
+            return redirect('/professores');
+        else dd("Erro ao atualizar o perfil do professor!!");
     }
 
-    public function destroy(Professor $professor)
-    {
-        //
-    }
+   public function delete($id) {
+        if(Professor::destroy($id))
+             return redirect('/professores');
+        else dd("Erro ao remover o professor!!");
+   }
 }

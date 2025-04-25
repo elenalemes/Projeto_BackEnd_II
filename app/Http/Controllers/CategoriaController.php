@@ -31,19 +31,22 @@ class CategoriaController extends Controller
         ]);
     }
 
-    public function edit(categoria $categoria)
-    {
-        //
+    public function edit($id) {
+        $aluno = Categoria::find($id);
+        return view('categorias.edit',compact('categorias'));
     }
 
-    public function update(Request $request, categoria $categoria)
-    {
-        //
+     public function update(Request $request,$id){
+        $newCategoria = $request->all();
+
+        if(Categoria::findOrFail($id)->update($newCategoria))
+            return redirect('/categorias');
+        else dd("Erro ao atualizar a categoria!!");
     }
 
-
-    public function destroy(categoria $categoria)
-    {
-        //
-    }
+   public function delete($id) {
+        if(Categoria::destroy($id))
+             return redirect('/categorias');
+        else dd("Erro ao remover a categoria!!");
+   }
 }

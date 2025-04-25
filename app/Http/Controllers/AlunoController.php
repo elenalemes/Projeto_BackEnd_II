@@ -29,4 +29,22 @@ class AlunoController extends Controller
         return view('alunos.create');
     }
 
+    public function update(Request $request,$id){
+        $newAluno = $request->all();
+
+        if(Aluno::findOrFail($id)->update($newAluno))
+            return redirect('/alunos');
+        else dd("Erro ao atualizar o aluno!!");
+    }
+
+    public function edit($id) {
+        $aluno = Aluno::find($id);
+        return view('alunos.edit',compact('alunos'));
+    }
+
+   public function delete($id) {
+        if(Aluno::destroy($id))
+             return redirect('/alunos');
+        else dd("Erro ao remover o aluno!!");
+   }
 }

@@ -19,17 +19,18 @@
                 <tbody>
                     @foreach ($alunosList as $aluno)
                         <tr>
-                            <td>
-                                <a href="/alunos/{{ $aluno->id }}">{{ $luno->id }}
-                                </a>
-                            </td>
+                            <td><a href="/alunos/{{ $aluno->id }}">{{ $luno->id }}</a></td>
                             <td>{{ $aluno->nome }}</td>
+                            <td>{{ $aluno->serie }}</td>
+                            <td>{{ $aluno->matricula }}</td>
+                            <td><a href="{{ route('aluno.edit',$aluno->id) }}">ATUALIZAR</a>|
+                            <a href="{{ route('aluno.delete',$aluno->id) }}">DELETAR</a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         @else
-            <p>Alunos não encontradas! </p>
+            <p>Alunos não encontrados! </p>
         @endif
     </table>
  </body>

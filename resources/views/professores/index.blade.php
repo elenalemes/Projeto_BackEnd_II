@@ -19,12 +19,11 @@
                 <tbody>
                     @foreach ($professoresList as $professor)
                         <tr>
-                            <td>
-                                <a href="/professores/{{ $professor->id }}">
-                                    {{ $professor->id }}
-                                </a>
-                            </td>
+                            <td><a href="/professores/{{ $professor->id }}">{{ $professor->id }}</a></td>
                             <td>{{ $professor->nome }}</td>
+                            <td>{{ $professor->email }}</td>
+                            <td><a href="{{ route('aluno.edit',$aluno->id) }}">ATUALIZAR</a>|
+                            <a href="{{ route('aluno.delete',$aluno->id) }}">DELETAR</a></td>
                         </tr>
                     @endforeach
                 </tbody>

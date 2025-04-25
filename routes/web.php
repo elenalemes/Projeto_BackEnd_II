@@ -14,6 +14,9 @@ Route::get('/alunos',[AlunoController::class,'index']);
 Route::get('/alunos/{id}',[AlunoController::class,'show']);
 Route::get('/alunos',[AlunoController::class,'create']);
 Route::post('/alunos',[AlunoController::class,'store']);
+Route::get('/alunos/{id}/edit',[AlunoController::class,'edit']);
+Route::post('/alunos/{id}',[AlunoController::class,'update']);
+Route::get('/alunos/{id}/delete',[AlunoController::class,'delete']);
 
 Route::get('/professores',[ProfessorController::class,'index']);
 Route::get('/professores/{id}',[ProfessorController::class,'show']);

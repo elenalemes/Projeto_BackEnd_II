@@ -19,12 +19,11 @@
                 <tbody>
                     @foreach ($categoriasList as $categoria)
                         <tr>
-                            <td>
-                                <a href="/categorias/{{ $categoria->id }}">
-                                    {{ $categoria->id }}
-                                </a>
-                            </td>
+                            <td><a href="/categorias/{{ $categoria->id }}">{{ $categoria->id }}</a></td>
                             <td>{{ $categoria->nome }}</td>
+                            <td>{{ $categoria->descricao }}</td>
+                            <td><a href="{{ route('categoria.edit',$categoria->id) }}">ATUALIZAR</a>|
+                            <a href="{{ route('categoria.delete',$categoria->id) }}">DELETAR</a></td>
                         </tr>
                     @endforeach
                 </tbody>
