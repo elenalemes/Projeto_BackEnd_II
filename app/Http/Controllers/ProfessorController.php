@@ -14,14 +14,17 @@ class ProfessorController extends Controller
     }
 
 
-    public function create()
-    {
-        //
+    public function create() {
+        return view('professores.create');
     }
 
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $newProfessor = $request->all();
+        //dd($newProduto);
+
+        if(Professor::create($newProfessor))
+            return redirect('/professores');
+            else dd("Erro ao inserir o professor!!");
     }
 
     public function show($id){

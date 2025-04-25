@@ -20,8 +20,7 @@
                     @foreach ($alunosList as $aluno)
                         <tr>
                             <td>
-                                <a href="/alunos/{{ $aluno->id }}">
-                                    {{ $luno->id }}
+                                <a href="/alunos/{{ $aluno->id }}">{{ $luno->id }}
                                 </a>
                             </td>
                             <td>{{ $aluno->nome }}</td>

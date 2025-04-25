@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Professor extends Model
 {
-    //
+    protected $fillable = [
+        'nome',
+        'email',
+        'telefone',
+        'data_nascimento',
+        'cpf',
+        'rg',
+        'naturalidade',
+        'nacionalidade',
+    ];
 }
+
