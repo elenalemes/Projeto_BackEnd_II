@@ -6,11 +6,33 @@
      <title>Documento do Sistema</title>
  </head>
  <body>
-     <h1>Lista de Categorias:</h1>
-     <ul>
-     @foreach ($listCategorias as $ccategoria)
-         <li>{{$categoria->nome}}</li>
-     @endforeach
-     </ul>
+    <h1>Lista de categorias:</h1>
+    <table>
+        @if ($categoriasList->count() > 0)
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($categoriasList as $categoria)
+                        <tr>
+                            <td>
+                                <a href="/categorias/{{ $categoria->id }}">
+                                    {{ $categoria->id }}
+                                </a>
+                            </td>
+                            <td>{{ $categoria->nome }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>Categorias não encontradas! </p>
+        @endif
+    </table>
+</body>
  </body>
  </html>

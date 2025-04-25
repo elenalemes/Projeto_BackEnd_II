@@ -6,11 +6,32 @@
      <title>Documento do Sistema</title>
  </head>
  <body>
-     <h1>Lista de Professores:</h1>
-     <ul>
-     @foreach ($listProfessors as $professor)
-         <li>{{$professor->nome}}</li>
-     @endforeach
-     </ul>
- </body>
+    <h1>Lista de professores:</h1>
+    <table>
+        @if ($professoresList->count() > 0)
+            <table>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($professoresList as $professor)
+                        <tr>
+                            <td>
+                                <a href="/professores/{{ $professor->id }}">
+                                    {{ $professor->id }}
+                                </a>
+                            </td>
+                            <td>{{ $professor->nome }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>Professores não encontrados! </p>
+        @endif
+    </table>
+</body>
  </html>

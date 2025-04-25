@@ -9,6 +9,12 @@ class AlunoController extends Controller
 {
     public function index(){
         $listAlunos = Aluno::all();
-        return view('aluno.index', compact('$listAlunos'));
+        return view('alunos.index',['alunosList'=>$listAlunos]);
+    }
+
+    public function show($id){
+        return view('alunos.show',[
+            'aluno'=>Aluno::find($id)
+        ]);
     }
 }
