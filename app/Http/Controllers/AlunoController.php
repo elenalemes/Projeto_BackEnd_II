@@ -39,7 +39,7 @@ class AlunoController extends Controller
 
     public function edit($id) {
         $aluno = Aluno::find($id);
-        return view('alunos.edit',compact('alunos'));
+        return view('alunos.edit',compact('aluno'));
     }
 
    public function delete($id) {

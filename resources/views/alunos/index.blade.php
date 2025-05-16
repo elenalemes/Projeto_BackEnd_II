@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach ($alunosList as $aluno)
                         <tr>
-                            <td><a href="/alunos/{{ $aluno->id }}">{{ $luno->id }}</a></td>
+                            <td><a href="/alunos/{{ $aluno->id }}">{{ $aluno->id }}</a></td>
                             <td>{{ $aluno->nome }}</td>
                             <td>{{ $aluno->serie }}</td>
                             <td>{{ $aluno->matricula }}</td>
