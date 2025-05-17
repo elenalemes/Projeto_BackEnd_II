@@ -26,6 +26,7 @@ class AlunoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(AlunoStoreRequest $request){
+        return $request->all();
         try{
             return new AlunoStoredResource(Aluno::create($request->validated()));
         } catch (\Exception $e) {
@@ -34,17 +35,18 @@ class AlunoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Aluno $aluno)
+    public function show($id)
     {
-        //
+        try {
+            $aluno = Aluno::findOrFail($id);
+            return new AlunoResource($aluno);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return $this->errorHandler('Aluno não encontrado.', $e, 404);
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao exibir o aluno.', $e);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(AlunoUpdateRequest $request, Aluno $aluno)
     {
         try {
@@ -54,9 +56,7 @@ class AlunoController extends Controller
             return $this->errorHandler('Erro ao atualizar produto',$e);
         }
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Aluno $aluno)
     {
         try {

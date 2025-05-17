@@ -50,8 +50,4 @@ class AlunoStoreRequest extends FormRequest
             ];
         }
 
-        public function prepareForValidation()
-        {
-           //
-        }
     }

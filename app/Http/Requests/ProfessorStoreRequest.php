@@ -45,8 +45,4 @@ class ProfessorStoreRequest extends FormRequest
             ];
         }
 
-        public function prepareForValidation()
-        {
-           //
-        }
 }

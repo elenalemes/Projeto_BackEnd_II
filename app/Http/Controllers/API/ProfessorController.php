@@ -31,20 +31,20 @@ class ProfessorController extends ApiController
         } catch (\Exception $e) {
             return $this->errorHandler('Erro ao criar o aluno.',$e);
         }
-
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Professor $professor)
-    {
-        //
-    }
+    public function show($id)
+        {
+            try {
+                $professor = Professor::findOrFail($id);
+                return new ProfessorResource($professor);
+            } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+                return $this->errorHandler('Professor não encontrado.', $e, 404);
+            } catch (\Exception $e) {
+                return $this->errorHandler('Erro ao exibir o professor.', $e);
+            }
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProfessorUpdateRequest $request, Professor $professor)
     {
         try {

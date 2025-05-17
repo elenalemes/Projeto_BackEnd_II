@@ -1,11 +1,11 @@
 <?php
 
 
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\WEB\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AlunoController;
-use App\Http\Controllers\ProfessorController;
-use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\WEB\AlunoController;
+use App\Http\Controllers\WEB\ProfessorController;
+use App\Http\Controllers\WEB\CategoriaController;
 
 
 

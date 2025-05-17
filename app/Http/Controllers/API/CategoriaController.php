@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Api\Controller;
 use App\Http\Controllers\Api\Controller as ApiController;
 use App\Http\Requests\CategoriaStoreRequest;
+use App\Http\Requests\CategoriaUpdateRequest;
 use App\Http\Resources\CategoriaCollection;
 use App\Http\Resources\CategoriaResource;
 use App\Http\Resources\CategoriaStoredResource;
@@ -21,10 +22,8 @@ class CategoriaController extends ApiController
         return new CategoriaCollection(Categoria::all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(CategoriaStoreRequest $request){
+        return $request->all();
         try{
             return new CategoriaStoredResource(Categoria::create($request->validated()));
         } catch (\Exception $e) {
@@ -33,25 +32,27 @@ class CategoriaController extends ApiController
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Categoria $categoria)
+    public function show($id)
     {
-        //
+        try {
+            $categoria = Categoria::findOrFail($id);
+            return new CategoriaResource($categoria);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return $this->errorHandler('Categoria não encontrada.', $e, 404);
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao exibir a categoria.', $e);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Categoria $categoria)
+    public function update(CategoriaUpdateRequest $request, Categoria $categoria)
     {
-        //
+        try {
+            $categoria->update($request->validated());
+            return new CategoriaResource($categoria);
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao atualizar a categoria.',$e);
+        }
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Categoria $categoria)
     {
         try {
