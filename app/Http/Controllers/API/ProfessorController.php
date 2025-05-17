@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Api\Controller;
+use App\Http\Controllers\Api\Controller as ApiController;
+use App\Http\Requests\ProfessorStoreRequest;
+use App\Http\Requests\ProfessorUpdateRequest;
 use App\Http\Resources\ProfessorCollection;
+use App\Http\Resources\ProfessorResource;
+use App\Http\Resources\ProfessorStoredResource;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 
-class ProfessorController extends Controller
+class ProfessorController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +25,13 @@ class ProfessorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(ProfessorStoreRequest $request){
+        try{
+            return new ProfessorStoredResource(Professor::create($request->validated()));
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao criar o aluno.',$e);
+        }
+
     }
 
     /**
@@ -36,16 +45,27 @@ class ProfessorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Professor $professor)
+    public function update(ProfessorUpdateRequest $request, Professor $professor)
     {
-        //
+        try {
+            $professor->update($request->validated());
+            return new ProfessorResource($professor);
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao atualizar produto',$e);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Professor $professor)
     {
-        //
+        try {
+            $professor->delete();
+            return response()->json([
+                'data' => new ProfessorResource($professor),
+                'message' => 'Professor deletado com sucesso!'
+            ]);
+        } catch (\Exception $e) {
+            return $this->errorHandler('Erro ao atualizar o professor.',$e);
+        }
     }
 }
+
