@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WEB\AlunoController;
 use App\Http\Controllers\WEB\ProfessorController;
 use App\Http\Controllers\WEB\CategoriaController;
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 
 
@@ -31,3 +35,10 @@ Route::get('/categorias',[CategoriaController::class,'index']);
 Route::get('/categorias/{id}',[CategoriaController::class,'show']);
 Route::get('/categorias',[CategoriaController::class,'create']);
 Route::post('/categorias',[CategoriaController::class,'store']);
+
+Route::post("/login",function(Request $request){
+    // return $request->all();
+    if(Auth::attempt(["email"=>$request->email,"password"=>$request->password]))
+        return new UserResource(User::where('email',$request->email)->get());
+    else return response()->json(["erro"=>"Dados inválidos!!"],401);
+});
