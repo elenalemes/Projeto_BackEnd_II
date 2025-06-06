@@ -38,6 +38,8 @@ Route::post('/categorias',[CategoriaController::class,'store']);
 
 Route::post("/login",function(Request $request){
     // return $request->all();
+    // tenho que chamar AUTH:guard('nome do guard')
+    // tenho que mexer config auth 
     if(Auth::attempt(["email"=>$request->email,"password"=>$request->password]))
         return new UserResource(User::where('email',$request->email)->get());
     else return response()->json(["erro"=>"Dados inválidos!!"],401);

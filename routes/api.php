@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AlunoController;
 use App\Http\Controllers\Api\CategoriaController;
 use App\Http\Controllers\Api\ProfessorController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\LoginController;
 use App\Models\User;
 
 Route::get('/user', function (Request $request) {

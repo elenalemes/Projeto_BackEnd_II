@@ -7,9 +7,9 @@ use App\Http\Requests\AlunoStoreRequest;
 use App\Http\Requests\AlunoUpdateRequest;
 use App\Http\Resources\AlunoCollection;
 use App\Http\Resources\AlunoResource;
-use App\Http\Requests\ProdutoUpdateRequest;
 use App\Http\Resources\AlunoStoredResource;
 use App\Models\Aluno;
+use Exception;
 use Illuminate\Http\Request;
 
 class AlunoController extends Controller
@@ -66,7 +66,7 @@ class AlunoController extends Controller
                 'message' => 'Aluno deletado com sucesso!'
             ]);
         } catch (\Exception $e) {
-            return $this->errorHandler('Erro ao excluir o aluno.',$e);
+            return $this->errorHandler('Erro ao atualizar o aluno.',$e);
         }
     }
 }
